@@ -1,0 +1,12 @@
+.flex-container {
+    display: flex;
+    background-color: antiquewhite;
+    height: 100%
+}
+
+.flex-container > a {
+    display: block;
+    background-color: blue;
+    height: 20%;
+    color: antiquewhite;
+}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% set title = "@chupeverything settings" %}
+
+{% block scripts %}
+<script>
+    function ensureNumbers() {
+        let nums = document.querySelectorAll(".number");
+        let allGood = true;
+        nums.forEach(n => {
+            if (n.value === ''){
+                allGood = false;
+            }
+        });
+        if (!allGood) {
+            document.getElementById('submit').disabled = true;
+        } else {
+            document.getElementById('submit').disabled = false;
+        }
+    }
+    setInterval(ensureNumbers, 100);
+</script>
+
+{% endblock %}
+
+{% block body %}
+<h1>Modify @chupeverything's settings</h1>
+<form action="" method="POST">
+    {% for setting, value, type in settings %}
+        <label for="{{ setting }}">{{ setting }}</label>
+        {% if type == "<class 'str'>" %}
+        <input type="text" name="s~{{ setting }}" value="{{ value }}">
+        {% elif type == "<class 'int'>" or type == "<class 'float'>" %}
+        <input type="number" name="n~{{ setting }}" value="{{ value }}" class="number">
+        {% elif type == "<class 'bool'>" and value %}
+        <input type="checkbox" name="b~{{ setting }}" checked>
+        {% elif type == "<class 'bool'>" and not value %}
+        <input type="checkbox" name="b~{{ setting }}">
+        {% endif %}
+        <br>
+    {% endfor %}
+    <input type="submit" value="Update" id="submit">
+</form>
+{% endblock %}
