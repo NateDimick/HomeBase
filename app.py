@@ -71,7 +71,8 @@ def monitor_update():
     """
     cpu_load = psutil.cpu_percent()
     if hostname == "raspberryduck":
-        cpu_temp = gpiozero.CPUTemperature()
+        cpu_temp = gpiozero.CPUTemperature().temperature
+        print(f"temp: {cpu_temp}")
     else:
         cpu_temp = "not on raspi"
-    return jsonify({"response": "Hello", "cpu_load": cpu_load, "host": hostname, "cpu_temp": cpu_temp})
+    return jsonify({"response": "Hello", "cpu_load": cpu_load, "host": hostname, "cpu_temp": f"{cpu_temp} C"})
