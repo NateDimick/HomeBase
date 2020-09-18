@@ -2,9 +2,26 @@
 
 {% set title = 'Nate\'s Home Base Web App' %}
 
+{% block scripts %}
+<script>
+    window.onload = () => {
+        document.getElementById("widths").onclick = () => {
+            Array.from(document.getElementsByTagName("a")).forEach(e => console.log(e.offsetWidth));
+        }
+    }
+    
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="flex-container">
-    <a href="/chupbot">@chupeverything Management</a>
-    <a href="/betting">Sports Betting Calculators</a>
+{% for route, desc in links %}
+    <a href="/{{ route }}">
+        <div>
+            <p>{{ desc }}</p>
+        </div>
+    </a>
+{% endfor %}
 </div>
+<button id="widths">Widths</button>
 {% endblock %}

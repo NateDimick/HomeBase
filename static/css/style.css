@@ -1,12 +1,23 @@
+body {
+    background-color: antiquewhite;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 .flex-container {
     display: flex;
-    background-color: antiquewhite;
-    height: 100%
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    align-content: center;
 }
 
 .flex-container > a {
-    display: block;
+    display: inline-flexbox;
+    padding: 5em;
+    margin: 1em;
     background-color: blue;
-    height: 20%;
     color: antiquewhite;
+    vertical-align: middle;
+    text-decoration: none;
+    text-emphasis: bold;
+    font-size: larger;
 }
