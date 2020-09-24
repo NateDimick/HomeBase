@@ -1,15 +1,17 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
-import json, psutil, socket, gpiozero
+import json, psutil, socket, gpiozero, requests
 from os.path import join, expanduser
 
 app = Flask(__name__)
 CORS(app)
 hostname = socket.gethostname()
 
+# this list is like a brainstorm/ roadmap of what I'd like to implement in the future
 features = [
     ("chupbot", "@chupeverything management"),
     ("raspi", "Hardware Monitor"),
+    ("dice", "DnD dice roller"),
     ("betting", "Sports Betting Calculators"),
     ("deisbot", "u/BrandeisBot management"),
     ("lights", "Smart Home Light management"),
@@ -63,7 +65,6 @@ def chupbot():
 def monitor():
     return render_template("raspi.html")
 
-
 @app.route("/raspi/update")
 def monitor_update():
     """
@@ -76,3 +77,7 @@ def monitor_update():
     else:
         cpu_temp = "not on raspi"
     return jsonify({"response": "Hello", "cpu_load": cpu_load, "host": hostname, "cpu_temp": f"{cpu_temp} C"})
+
+@app.route("/dice")
+def dice():
+    return render_template("dice.html")

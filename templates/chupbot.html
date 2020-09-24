@@ -3,24 +3,7 @@
 {% set title = "@chupeverything settings" %}
 
 {% block scripts %}
-<script>
-    function ensureNumbers() {
-        let nums = document.querySelectorAll(".number");
-        let allGood = true;
-        nums.forEach(n => {
-            if (n.value === ''){
-                allGood = false;
-            }
-        });
-        if (!allGood) {
-            document.getElementById('submit').disabled = true;
-        } else {
-            document.getElementById('submit').disabled = false;
-        }
-    }
-    setInterval(ensureNumbers, 100);
-</script>
-
+<script src="{{ url_for('static', filename='js/chupbot.js') }}"></script>
 {% endblock %}
 
 {% block body %}

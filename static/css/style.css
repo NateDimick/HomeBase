@@ -10,7 +10,7 @@ body {
     align-content: center;
 }
 
-.flex-container > a {
+.flex-container div {
     display: inline-flexbox;
     padding: 5em;
     margin: 1em;
@@ -18,6 +18,12 @@ body {
     color: antiquewhite;
     vertical-align: middle;
     text-decoration: none;
+    text-emphasis: bold;
+    font-size: larger;
+}
+
+#roll-result {
+    text-align: center;
     text-emphasis: bold;
     font-size: larger;
 }

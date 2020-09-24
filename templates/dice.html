@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% set title = "Dice Roller" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dice.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<h1>Dice Roller powered by Random.org</h1>
+<div>
+    <h1 id="roll-result"></h1>
+</div>
+<div class="flex-container">
+    {% for i in [4, 6, 8, 10, 12, 20] %}
+    <div class="roll">
+        <p>{{ i }}</p>
+    </div>
+    {% endfor %}
+</div>
+<input type="number" name="num-dice" id="num-dice" value="1">
+{% endblock %}
