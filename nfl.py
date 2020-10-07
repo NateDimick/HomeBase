@@ -6,6 +6,7 @@ from os.path import exists, join
 
 def get_game_results(week: int=0):
     opt = Options()
+    opt.add_argument('--no-sandbox')
     opt.headless = True
     driver = webdriver.Chrome(options=opt)
     if week:
@@ -63,6 +64,7 @@ def get_game_results(week: int=0):
 
 def get_betting_info(week: int=0):
     opt = Options()
+    opt.add_argument('--no-sandbox')
     opt.headless = True
     driver = webdriver.Chrome(options=opt)
     if week:
@@ -330,4 +332,6 @@ if __name__ == '__main__':
     """
     #wn = postgame()
     #pregame(5)
-    over_under_record()
+    #over_under_record()
+    wn, js = get_betting_info()
+    print(js)
