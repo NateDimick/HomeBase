@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% set title = 'NFL Over/Under Center' %}
+
+{% block scripts %}
+<script>
+    function overUnderColor () {
+        let advice = document.querySelectorAll(".over-under");
+        advice.forEach(e => {
+            if (e.innerHTML === 'Over') {
+                e.style.backgroundColor = 'green';
+            } else if (e.innerHTML === 'Under') {
+                e.style.backgroundColor = 'red';
+            }
+        })
+    }
+
+    function wagerAmount() {
+        let rows = Array.from(document.getElementsByTagName('TR'));
+        let total = document.getElementById('wager').value;
+        rows.shift(); // get rid of header row
+        rows.forEach(row => {
+            // get percent from .percent cell
+            let percent = parseFloat(row.querySelector(".percent").innerHTML);
+            console.log(percent);
+            // set .amount cell = total * percent
+            row.querySelector(".amount").innerHTML = `$${(total * (percent/100)).toFixed(2)}`;
+        })
+    }
+
+    window.onload = () => {
+        overUnderColor();
+        wagerAmount();
+        document.getElementById('wager').onchange = wagerAmount;
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="flex-container">
+    <div id=update>
+        <p>Update for new week</p>
+    </div>
+    <a href="/nfl/updateodds">
+        <div id="odds-update">
+            <p>Update Totals</p>
+        </div>
+    </a>
+    
+
+</div>
+<div id="this-week-totals">
+    <table>
+        <tr>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Sportsbook Total</th>
+            <th>Projected Total</th>
+            <th>Pure Offense Total</th>
+            <th>Pure Points Allowed</th>
+            <th>Take the...</th>
+            <th>Wager Percent</th>
+            <th>Wager Amount</th>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{ game['home'] }}</td>
+            <td>{{ game['away'] }}</td>
+            <td>{{ game['total'] }}</td>
+            <td>{{ game['apt'] }}</td>
+            <td>{{ game['pop'] }}</td>
+            <td>{{ game['ppa'] }}</td>
+            <td class="over-under">{{ game['ou'] }}</td>
+            <td class="percent">{{ game['pct'] }}</td>
+            <td class="amount"></td>
+        </tr>
+        {% endfor %}
+    </table>
+<label for="wager">Over/Under Purse this week</label>
+<input type="number" name="wager" id="wager" value=1>
+</div>
+<div>
+    
+</div>
+{% endblock %}

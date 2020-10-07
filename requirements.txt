@@ -5,3 +5,5 @@ psutil
 gpiozero
 Rpi.GPIO
 requests
+selenium
+beautifulsoup4
